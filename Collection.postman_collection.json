@@ -1,0 +1,466 @@
+{
+	"info": {
+		"_postman_id": "a8354a24-c9b7-479c-8f5e-161c71d2d6ba",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34421477"
+	},
+	"item": [
+		{
+			"name": "User Registration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"rthtrh"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"ragmai.com\",\r\n    \"name\": \"Mit\",\r\n    \"password\": \"MSstrer17@\",\r\n    \"password2\": \"MSstver17@\",\r\n    \"tc\": \"True\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/register/?Accept=application/json",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"register",
+						""
+					],
+					"query": [
+						{
+							"key": "Accept",
+							"value": "application/json"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"rajsahu123@gmail.com\",\r\n    \"password\": \"RSstriver18@\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEzNzIwNjg1LCJpYXQiOjE3MTM3MTgyODUsImp0aSI6ImE5ZjlhMWMyZDE0ZDRlMzViNDAwNGNjYWM3NDQzOTUwIiwidXNlcl9pZCI6MX0.5PzZw1pmQVH1KVxo9Xd3Q3vCVWKsjmVEeGnNRSh9jvU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/profile",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Paasword change",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEzNjk4ODEzLCJpYXQiOjE3MTM2OTY0MTMsImp0aSI6Ijg4NWFjNGY1OTg5MzRkMTM4ZTExNTZkZDI1ZTE2YWRiIiwidXNlcl9pZCI6MX0.vRNxK1f8rMXNhk9maPyOrzl2TOzIagi4EnpeY_1gHN0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\":\"RSstriver18@\",\r\n    \"password2\":\"RSstriver18@\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/changepassword/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"changepassword",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEzNzE0MzMzLCJpYXQiOjE3MTM3MTE5MzMsImp0aSI6IjQyM2M5NjU5NWRhZTQ2MjE5NzY4MWU2MGRhODA5YjcyIiwidXNlcl9pZCI6MX0.CfLKeNsn96ZzSF8MisTSwVuAKz7BFQEhpqsPg4YpzsQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"raw33\",\r\n    \"description\": \"hwllo its me\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/todo/lists/add/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"todo",
+						"lists",
+						"add",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Task",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEzNzIwNjg1LCJpYXQiOjE3MTM3MTgyODUsImp0aSI6ImE5ZjlhMWMyZDE0ZDRlMzViNDAwNGNjYWM3NDQzOTUwIiwidXNlcl9pZCI6MX0.5PzZw1pmQVH1KVxo9Xd3Q3vCVWKsjmVEeGnNRSh9jvU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"list_id\": 3,\r\n    \"name\": \"BigBazzar work weekly\",\r\n    \"description\": \"buy various vegatable and groccries\",\r\n    \"date\":\"2024-04-30\",\r\n    \"priority\":\"High\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/todo/tasks/add/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"todo",
+						"tasks",
+						"add",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update task",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEzNzA2ODY5LCJpYXQiOjE3MTM3MDQ0NjksImp0aSI6Ijk4MmIyMzcxZDY5YzQ1NjVhMTlkYjIxMTI0MGVlNjAzIiwidXNlcl9pZCI6MX0.wSWh_46dmYF2yIFoRbDLZzQajZcjEoVm3S1IlLeHps0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"task_id\": 1,\r\n    \"status\": \"true\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/todo/tasks/task/update_status",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"todo",
+						"tasks",
+						"task",
+						"update_status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEzNzIwNjg1LCJpYXQiOjE3MTM3MTgyODUsImp0aSI6ImE5ZjlhMWMyZDE0ZDRlMzViNDAwNGNjYWM3NDQzOTUwIiwidXNlcl9pZCI6MX0.5PzZw1pmQVH1KVxo9Xd3Q3vCVWKsjmVEeGnNRSh9jvU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/todo/lists/list",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"todo",
+						"lists",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Tasks",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEzNzIwNjg1LCJpYXQiOjE3MTM3MTgyODUsImp0aSI6ImE5ZjlhMWMyZDE0ZDRlMzViNDAwNGNjYWM3NDQzOTUwIiwidXNlcl9pZCI6MX0.5PzZw1pmQVH1KVxo9Xd3Q3vCVWKsjmVEeGnNRSh9jvU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/todo/tasks/list?list_id=3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"todo",
+						"tasks",
+						"list"
+					],
+					"query": [
+						{
+							"key": "list_id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Task",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEzNzIwNjg1LCJpYXQiOjE3MTM3MTgyODUsImp0aSI6ImE5ZjlhMWMyZDE0ZDRlMzViNDAwNGNjYWM3NDQzOTUwIiwidXNlcl9pZCI6MX0.5PzZw1pmQVH1KVxo9Xd3Q3vCVWKsjmVEeGnNRSh9jvU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/todo/tasks/4/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"todo",
+						"tasks",
+						"4",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete List",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEzNzIzMTY5LCJpYXQiOjE3MTM3MjA3NjksImp0aSI6ImVkNTRkZmY5ZWIxNTQ4YmE4OTMwM2Y4NTcwZDJhMzZkIiwidXNlcl9pZCI6MX0.2r5QBrpyWYYeWcCFElABmnhSU6a0dPVGwaS64M9uIJk",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/todo/lists/4/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"todo",
+						"lists",
+						"4",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

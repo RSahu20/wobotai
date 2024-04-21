@@ -6,16 +6,13 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import status
 from django.utils import timezone
 from datetime import timedelta
-
-class HelloWorld(APIView):
-    def get(self, request):
-        return Response('HELLO WORLD! from Django.')
-    
-
+   
+# Add list 
 class ListAdd(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request):
+        # Checking if 'name' parameter is provided and not empty
         if request.data.get('name', None) and request.data.get('name') != '':
             # Getting request data
             name = request.data.get('name')
@@ -23,12 +20,14 @@ class ListAdd(APIView):
 
             # Writing to database
             try:
+                # Creating new TaskList object and saving it to the database
                 new_list = TaskList(name=name, description=description)
                 new_list.save()
+                # Creating ListAccess object for the user with 'owner' role
                 new_list_access = ListAccess(user=request.user, list=new_list, role='owner')
                 new_list_access.save()
 
-                # Responding back
+                # Responding back with success message and details of the newly created list
                 resp_dict = {
                     'status': 'success',
                     'message': 'List created successfully',
@@ -36,7 +35,7 @@ class ListAdd(APIView):
                 }
                 resp = Response(resp_dict, status=status.HTTP_201_CREATED)
             except ValueError as val_err:
-                # Responding back
+                # Responding back with error message if there's an issue with database operations
                 resp_dict = {
                     'status': 'failed',
                     'message': 'Something went wrong while writing to database, {0}'.format(val_err),
@@ -44,7 +43,7 @@ class ListAdd(APIView):
                 }
                 resp = Response(resp_dict, status=status.HTTP_400_BAD_REQUEST)
             except Exception as er:
-                # Responding back
+                # Responding back with error message if there's an unexpected error
                 resp_dict = {
                     'status': 'failed',
                     'message': 'Something unexpected happened!, {0}'.format(er),
@@ -53,6 +52,7 @@ class ListAdd(APIView):
                 resp = Response(resp_dict, status=status.HTTP_400_BAD_REQUEST)
 
         else:
+            # Responding back with error message if 'name' parameter is missing or empty
             resp_dict = {
                 'status': 'failed',
                 'message': 'List name is required but not provided',
@@ -74,13 +74,16 @@ class ListFetch(APIView):
         }
 
         try:
+            # Fetching the IDs of lists accessible to the user
             list_ids = ListAccess.objects.values_list('list').filter(user=request.user)
+            # Fetching details of the lists
             lists = TaskList.objects.filter(id__in=list_ids).values()
             resp_dict['status'] = 'Success'
             resp_dict['message'] = 'Retrieved the list of todo lists'
             resp_dict['data'] = lists
 
         except Exception as e:
+            # Handling exceptions and returning error response
             print(e)
             resp_dict['status'] = 'Failed'
             resp_dict['message'] = 'Something went wrong while fetching data. Error: '+e.__str__()
@@ -101,6 +104,7 @@ class TaskAdd(APIView):
             'data': None
         }
 
+        # Extracting request parameters
         req_list_id = request.data.get("list_id")
         req_task_name = request.data.get("name")
         req_task_desc = request.data.get('description', '')
@@ -110,8 +114,10 @@ class TaskAdd(APIView):
         if req_list_id and TaskList.objects.filter(id=req_list_id).exists() and \
                 req_task_name and req_task_name != '':
             try:
+                # Fetching TaskList object
                 task_list = TaskList.objects.get(id=req_list_id)
 
+                # Checking user's permission to edit the list
                 user_perm = ListAccess.objects.filter(user=request.user, list=task_list)
 
                 if user_perm.count() != 1 or user_perm.first().role != 'owner':
@@ -127,6 +133,7 @@ class TaskAdd(APIView):
                 )
                 new_task.save()
 
+                # Responding back with success message and details of the newly created task
                 resp_dict['status'] = "success"
                 resp_dict['message'] = "Task creation successful"
                 resp_dict['data'] = {
@@ -141,23 +148,27 @@ class TaskAdd(APIView):
                 resp.status_code = status.HTTP_200_OK
 
             except PermissionError as pe:
+                # Handling permission-related error and returning appropriate response
                 resp_dict['status'] = "failed"
                 resp_dict['message'] = pe.__str__()
                 resp_dict['data'] = None
                 resp = Response(resp_dict, status=status.HTTP_403_FORBIDDEN)
             except Exception as e:
+                # Handling other errors and returning appropriate response
                 resp_dict['status'] = "failed"
                 resp_dict['message'] = "Something went wrong, Error: "+e.__str__()
                 resp_dict['data'] = None
                 resp = Response(resp_dict, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         else:
+            # Responding back with error message if required parameters are missing or invalid
             resp_dict['status'] = "failed"
             resp_dict['message'] = "Invalid name or list_id passed"
             resp_dict['data'] = None
             resp = Response(resp_dict, status=status.HTTP_400_BAD_REQUEST)
 
         return resp
+
 
 
 class TaskFetch(APIView):
@@ -328,40 +339,40 @@ class TaskDelete(APIView):
         return Response({"message": "Task deleted successfully"}, status=status.HTTP_200_OK)
 
 
-from django.utils import timezone
-from datetime import timedelta
+# from django.utils import timezone
+# from datetime import timedelta
 
-class LeastTimeLeftTasks(APIView):
-    permission_classes = (IsAuthenticated,)
+# class LeastTimeLeftTasks(APIView):
+#     permission_classes = (IsAuthenticated,)
 
-    def get(self, request):
-        resp_dict = {
-            'status': None,
-            'message': None,
-            'data': None
-        }
+#     def get(self, request):
+#         resp_dict = {
+#             'status': None,
+#             'message': None,
+#             'data': None
+#         }
 
-        try:
-            # Get current date
-            current_date = timezone.now().date()
+#         try:
+#             # Get current date
+#             current_date = timezone.now().date()
 
-            # Calculate the deadline date 7 days from now
-            deadline_date = current_date + timedelta(days=7)
+#             # Calculate the deadline date 7 days from now
+#             deadline_date = current_date + timedelta(days=7)
 
-            # Fetch tasks that have their deadline within the next 7 days
-            tasks = Task.objects.filter(list__access__user=request.user, date__range=[current_date, deadline_date]).order_by('date').values()
+#             # Fetch tasks that have their deadline within the next 7 days
+#             tasks = Task.objects.filter(list__access__user=request.user, date__range=[current_date, deadline_date]).order_by('date').values()
 
-            resp_dict['status'] = "success"
-            resp_dict['message'] = "Fetched tasks with the least time left successfully"
-            resp_dict['data'] = tasks
-            resp = Response(resp_dict)
-            resp.status_code = 200
+#             resp_dict['status'] = "success"
+#             resp_dict['message'] = "Fetched tasks with the least time left successfully"
+#             resp_dict['data'] = tasks
+#             resp = Response(resp_dict)
+#             resp.status_code = 200
 
-        except Exception as e:
-            resp_dict['status'] = "failed"
-            resp_dict['message'] = "Something went wrong, Error: " + e.__str__()
-            resp_dict['data'] = None
-            resp = Response(resp_dict)
-            resp.status_code = 500
+#         except Exception as e:
+#             resp_dict['status'] = "failed"
+#             resp_dict['message'] = "Something went wrong, Error: " + e.__str__()
+#             resp_dict['data'] = None
+#             resp = Response(resp_dict)
+#             resp.status_code = 500
 
-        return resp
+#         return resp
